@@ -1,0 +1,18 @@
+{
+  "device": {
+    "name": "Sunway Zonwering"
+  },
+  "pair": {
+    "test": {
+      "choose_capabilities": "Selecteer welke functionaliteit de raambekleding ondersteunt",
+      "capabilities": {
+        "all": "Omhoog/Omlaag en kantelen",
+        "windowcoverings_state": "Alleen Omhoog/Omlaag",
+        "windowcoverings_tilt": "Alleen kantelen",
+        "custom_windowcoverings_state": "Omhoog/Omlaag",
+        "custom_windowcoverings_duette": "Duette® Shades Top Down",
+        "custom_windowcoverings_tilt": "Kantelen"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "device": {
+    "name": "Sunway Blind"
+  },
+  "pair": {
+    "choose_capabilities": "Select the features of your window covering",
+    "capabilities": {
+      "all": "Up/Down and Tilt",
+      "windowcoverings_state": "Only Up/Down",
+      "windowcoverings_tilt": "Only Tilt",
+      "custom_windowcoverings_state": "Up/Down",
+      "custom_windowcoverings_duette": "Duette® Shades Top Down",
+      "custom_windowcoverings_tilt": "Tilt"
+    }
+  }
+}

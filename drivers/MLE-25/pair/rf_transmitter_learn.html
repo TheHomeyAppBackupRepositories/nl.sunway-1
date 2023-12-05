@@ -1,0 +1,96 @@
+<style type="text/css">
+  #rf-transmitter-learn-wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10%;
+    box-sizing: border-box;
+  }
+
+  #rf-transmitter-learn-image {
+    display: block;
+    width: 80vw;
+    height: 80vw;
+    margin: 2em auto;
+    background: url(assets/pair.svg) no-repeat center center;
+    background-size: contain;
+  }
+
+  #rf-transmitter-learn-instruction {
+    display: block;
+    text-align: center;
+    font-weight: 400;
+  }
+</style>
+
+<div id="rf-transmitter-learn-wrap">
+
+  <div id="rf-transmitter-learn-image"></div>
+
+  <div class="homey-form-group">
+    <fieldset class="homey-form-radio-set">
+      <legend class="homey-form-radio-set-title" data-i18n="pair.choose_capabilities"></legend>
+  
+      <label class="homey-form-radio">
+        <input id="windowcoverings_all" class="homey-form-radio-input" type="radio" name="windowcoverings" checked/>
+        <span class="homey-form-radio-checkmark"></span>
+        <span class="homey-form-radio-text" data-i18n=pair.capabilities.all></span>
+      </label>
+
+      <label class="homey-form-radio">
+        <input id="windowcoverings_state" class="homey-form-radio-input" type="radio" name="windowcoverings"/>
+        <span class="homey-form-radio-checkmark"></span>
+        <span class="homey-form-radio-text" data-i18n=pair.capabilities.windowcoverings_state></span>
+      </label>
+  
+      <label class="homey-form-radio">
+        <input id="windowcoverings_tilt" class="homey-form-radio-input" type="radio" name="windowcoverings"/>
+        <span class="homey-form-radio-checkmark"></span>
+        <span class="homey-form-radio-text" data-i18n=pair.capabilities.windowcoverings_tilt></span>
+      </label>
+    </fieldset>
+  </div>
+  
+  <p id="rf-transmitter-learn-instruction"></p>
+
+</div>
+
+<script type="text/javascript">
+  (function () {
+    const $instruction = document.getElementById('rf-transmitter-learn-instruction');
+    const $allRadio = document.getElementById('windowcoverings_all');
+    const $stateRadio = document.getElementById('windowcoverings_state');
+    const $tiltRadio = document.getElementById('windowcoverings_tilt');
+
+
+    Homey.getOptions((err, options) => {
+      if (err) return Homey.error(err);
+      if (options && options.title) Homey.setTitle(Homey.__(options.title));
+      if (options && options.instruction) $instruction.innerHTML = Homey.__(options.instruction);
+    });
+
+
+    Homey.on('createDevice', (device) => {
+      this.capabilities = [];
+      if ($allRadio.checked){
+        this.capabilities.push('windowcoverings_state');
+        this.capabilities.push('windowcoverings_tilt_down');
+        this.capabilities.push('windowcoverings_tilt_up');
+      }else if ($stateRadio.checked){
+        this.capabilities.push('windowcoverings_state');
+      } else if ($tiltRadio.checked){
+        this.capabilities.push('windowcoverings_tilt_down');
+        this.capabilities.push('windowcoverings_tilt_up');
+      }
+      Homey.createDevice({
+        ...device,
+        capabilities: this.capabilities,
+
+      }, err => {
+        if (err) return Homey.error(err);
+        return Homey.done();
+      });
+    });
+  })();
+</script>
