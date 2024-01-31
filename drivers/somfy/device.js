@@ -49,7 +49,7 @@ module.exports = class extends RFDevice {
   static CAPABILITIES = {
     windowcoverings_state({ value, opts, data }) {
       let cmd = value;
-      if (this.getSetting('rotated') === '180') {
+      if (this.getSetting('rotated')) {
         if (value === 'up') {
           cmd = 'down';
         } else if (value === 'down') {
